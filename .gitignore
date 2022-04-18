@@ -83,3 +83,7 @@ uploads/*
 # except one (empty) file to have the folder in version control
 !uploads/.gitkeep
 
+# Certs
+/certrequest.csr
+/ssl-cert.pem
+/ssl-key.pem
