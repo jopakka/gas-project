@@ -6,6 +6,8 @@ import express from 'express';
 import db from './utils/db';
 import helmet from 'helmet';
 
+import overpass from 'query-overpass';
+
 const httpPort = process.env.HTTP_PORT || 3000;
 
 (async () => {
@@ -16,11 +18,22 @@ const httpPort = process.env.HTTP_PORT || 3000;
     });
 
     const app = express();
-    app.use(helmet());
+    // app.use(helmet());
 
     await server.start();
 
     server.applyMiddleware({app});
+
+    app.get('/gas', (req, res) => {
+      overpass(
+          'node(60.21611486153282,24.691686630249023,60.25310087633947,24.751253128051758)[amenity=fuel];out;',
+          (err, data) => {
+            data.features.forEach(f => {
+              console.log(f['geometry']);
+            });
+            res.json(data.features);
+          }, {flatProperties: true});
+    });
 
     process.env.NODE_ENV = process.env.NODE_ENV || 'development';
     db.on('connected', () => {
