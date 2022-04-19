@@ -1,46 +1,49 @@
 'use strict';
 import overpass from 'query-overpass';
-
-const addressKeys = [
-  'city',
-  'housenumber',
-  'postcode',
-  'street',
-  'country',
-];
-
-const fuelKeys = [
-  'diesel',
-  'e10',
-  'lpg',
-  'octane_95',
-  'octane_98',
-  'e85',
-];
+import axios from 'axios';
+import qs from 'querystring';
 
 const options = {
   flatProperties: true,
   overpassUrl: 'https://overpass.kumi.systems/api/interpreter',
 };
 
+const mapKeyValues = (station, filter) => {
+  const keys = Object.keys(station.properties).filter(k => k.includes(filter));
+  console.log('keys', keys);
+};
+
 const getStationsByBounds = (bounds) => {
-  return new Promise((resole, reject) => {
+  return new Promise((resolve, reject) => {
     overpass(
         `[out:json];
-          (
-            node["amenity"="fuel"](${bounds.s},${bounds.w},${bounds.n},${bounds.e});
-            way["amenity"="fuel"](${bounds.s},${bounds.w},${bounds.n},${bounds.e});
-          );
-          out;>;out skel;
+          nw["amenity"="fuel"](${bounds.s},${bounds.w},${bounds.n},${bounds.e});
+          out center qt;
         `,
         (err, data) => {
           if (err) return reject(err);
           const stations = data.features;
-          resole(stations);
+          resolve(stations);
+        }, options);
+  });
+};
+
+const getStationsAround = (location, radius = 10000) => {
+  return new Promise(async (resolve, reject) => {
+    overpass(
+        `[out:json];
+          nw["amenity"="fuel"](around:${radius},${location.lat},${location.lon});
+          out center qt;
+        `,
+        (err, data) => {
+          if (err) return reject(err);
+          const stations = data.features;
+          resolve(stations);
         }, options);
   });
 };
 
 export {
   getStationsByBounds,
+  getStationsAround,
 };

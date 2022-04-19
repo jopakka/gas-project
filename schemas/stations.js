@@ -3,28 +3,25 @@ import {gql} from 'apollo-server-express';
 
 export default gql`
    extend type Query {
-     stations(bounds: Bounds): [Station]
+     stationsByBounds(bounds: Bounds!): [Station]
+     stationsAround(location: Location!, radius: Float): [Station]
    }
    
    type Station {
       id: String
       properties: Properties
+      geometry: Geometry
    }
    
    type Properties {
-      address: Address
-      amenity: String
       brand: String
       name: String
       operator: String
-      shop: String
-      source: String
-      website: String
-      wheelchair: String
    }
    
-   type Address {
-      city: String
+   type Geometry {
+      type: String
+      coordinates: [Float]
    }
    
    input Bounds {
@@ -32,5 +29,10 @@ export default gql`
       w: Float!
       n: Float!
       e: Float!
+   }
+   
+   input Location {
+      lon: Float!
+      lat: Float!
    }
 `;

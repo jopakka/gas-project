@@ -24,17 +24,6 @@ const httpPort = process.env.HTTP_PORT || 3000;
 
     server.applyMiddleware({app});
 
-    app.get('/gas', (req, res) => {
-      overpass(
-          'node(60.21611486153282,24.691686630249023,60.25310087633947,24.751253128051758)[amenity=fuel];out;',
-          (err, data) => {
-            data.features.forEach(f => {
-              console.log(f['geometry']);
-            });
-            res.json(data.features);
-          }, {flatProperties: true});
-    });
-
     process.env.NODE_ENV = process.env.NODE_ENV || 'development';
     db.on('connected', () => {
       if (process.env.NODE_ENV === 'production') {
