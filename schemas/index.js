@@ -1,6 +1,10 @@
 'use strict';
 import {gql} from 'apollo-server-express';
 import stations from './stations';
+import fuel95 from './fuel95';
+import fuel98 from './fuel98';
+import fuelDiesel from './fuelDiesel';
+import fuel from './fuel';
 
 const linkSchema = gql`
    type Query {
@@ -14,4 +18,8 @@ const linkSchema = gql`
 export default [
   linkSchema,
   stations,
+  fuel,
+  fuel95,
+  fuel98,
+  fuelDiesel,
 ];

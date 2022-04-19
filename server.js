@@ -6,8 +6,6 @@ import express from 'express';
 import db from './utils/db';
 import helmet from 'helmet';
 
-import overpass from 'query-overpass';
-
 const httpPort = process.env.HTTP_PORT || 3000;
 
 (async () => {

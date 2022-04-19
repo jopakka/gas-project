@@ -11,6 +11,7 @@ export default gql`
       id: String
       properties: Properties
       geometry: Geometry
+      prices: Prices
    }
    
    type Properties {
@@ -22,6 +23,12 @@ export default gql`
    type Geometry {
       type: String
       coordinates: [Float]
+   }
+   
+   type Prices {
+      fuel95: Fuel
+      fuel98: Fuel
+      fuelDiesel: Fuel
    }
    
    input Bounds {
