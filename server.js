@@ -16,7 +16,9 @@ const httpPort = process.env.HTTP_PORT || 3000;
     });
 
     const app = express();
-    // app.use(helmet());
+    if(process.env.NODE_ENV === 'production') {
+      app.use(helmet());
+    }
 
     await server.start();
 
