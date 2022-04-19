@@ -8,9 +8,20 @@ const options = {
   overpassUrl: 'https://overpass.kumi.systems/api/interpreter',
 };
 
-const mapKeyValues = (station, filter) => {
-  const keys = Object.keys(station.properties).filter(k => k.includes(filter));
-  console.log('keys', keys);
+const getStation = (id) => {
+  return new Promise((resolve, reject) => {
+    const [type, osmId] = id.split('/');
+    overpass(
+        `[out:json];
+          ${type}(id:${osmId});
+          out center qt;
+        `,
+        (err, data) => {
+          if (err) return reject(err);
+          const stations = data.features;
+          resolve(stations);
+        }, options);
+  });
 };
 
 const getStationsByBounds = (bounds) => {
@@ -46,4 +57,5 @@ const getStationsAround = (location, radius = 10000) => {
 export {
   getStationsByBounds,
   getStationsAround,
+  getStation,
 };

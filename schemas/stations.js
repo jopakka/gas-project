@@ -3,6 +3,7 @@ import {gql} from 'apollo-server-express';
 
 export default gql`
    extend type Query {
+     station(id: String!): Station
      stationsByBounds(bounds: Bounds!): [Station]
      stationsAround(location: Location!, radius: Float): [Station]
    }

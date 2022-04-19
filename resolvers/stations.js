@@ -1,6 +1,10 @@
 'use strict';
 
-import {getStationsAround, getStationsByBounds} from '../utils/overpass';
+import {
+  getStation,
+  getStationsAround,
+  getStationsByBounds,
+} from '../utils/overpass';
 import Fuel95 from '../models/fuel95';
 import Fuel98 from '../models/fuel98';
 import FuelDiesel from '../models/fuelDiesel';
@@ -15,6 +19,11 @@ const getFuelPrices = async (station) => {
 
 export default {
   Query: {
+    station: async (parent, {id}) => {
+      const station = (await getStation(id))[0];
+      await getFuelPrices(station);
+      return station;
+    },
     stationsByBounds: async (parent, {bounds}) => {
       const stations = await getStationsByBounds(bounds);
       await Promise.all(stations.map(getFuelPrices));
