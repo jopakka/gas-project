@@ -5,6 +5,7 @@ import fuel95 from './fuel95';
 import fuel98 from './fuel98';
 import fuelDiesel from './fuelDiesel';
 import fuel from './fuel';
+import user from './user';
 
 const linkSchema = gql`
    type Query {
@@ -22,4 +23,5 @@ export default [
   fuel95,
   fuel98,
   fuelDiesel,
+  user,
 ];

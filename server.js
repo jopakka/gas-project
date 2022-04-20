@@ -5,6 +5,7 @@ import resolvers from './resolvers/index';
 import express from 'express';
 import db from './utils/db';
 import helmet from 'helmet';
+import {checkAuth} from './utils/auth';
 
 const httpPort = process.env.HTTP_PORT || 3000;
 
@@ -13,6 +14,12 @@ const httpPort = process.env.HTTP_PORT || 3000;
     const server = new ApolloServer({
       typeDefs: schemas,
       resolvers,
+      context: async ({req}) => {
+        if (req) {
+          const user = await checkAuth(req);
+          return {user, req};
+        }
+      },
     });
 
     const app = express();
