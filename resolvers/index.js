@@ -4,6 +4,7 @@ import fuel95 from './fuel95';
 import fuel98 from './fuel98';
 import fuelDiesel from './fuelDiesel';
 import user from './user';
+import favorites from './favorites';
 
 export default [
   stations,
@@ -11,4 +12,5 @@ export default [
   fuel98,
   fuelDiesel,
   user,
+  favorites,
 ];

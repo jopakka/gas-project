@@ -40,7 +40,7 @@ passport.use('jwt', new JWTStrategy(
       secretOrKey: process.env.TOKEN_SECRET,
     },
     (payload, done) => {
-      console.log('jwt payload', payload);
+      // console.log('jwt payload', payload);
       done(null, payload);
     }));
 
