@@ -10,5 +10,9 @@ export default {
       }
       return History.find({userID});
     },
+    stationHistory: async (parent, {stationID, type}) => {
+      const filter = type ? {stationID, type} : {stationID}
+      return History.find(filter);
+    },
   },
 };
