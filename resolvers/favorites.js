@@ -3,8 +3,6 @@
 import {AuthenticationError} from 'apollo-server-express';
 import Favorites from '../models/favorites';
 
-const authErrorMessage = 'Invalid credentials';
-
 export default {
   Query: {
     favorites: async (parent, args, {user}) => {

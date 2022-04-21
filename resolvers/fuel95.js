@@ -1,5 +1,7 @@
 'use strict';
 import Fuel95 from '../models/fuel95';
+import {AuthenticationError} from 'apollo-server-express';
+import {authErrorMessage} from '../utils/messages';
 
 export default {
   Query: {
@@ -14,7 +16,11 @@ export default {
     },
   },
   Mutation: {
-    update95: async (parent, {stationID, price}) => {
+    update95: async (parent, {stationID, price}, {user}) => {
+      if (!user) {
+        throw new AuthenticationError(authErrorMessage);
+      }
+
       const new95 = await Fuel95.findOneAndUpdate(
           {stationID},
           {price},

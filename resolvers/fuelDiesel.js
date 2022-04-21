@@ -1,5 +1,7 @@
 'use strict';
 import FuelDiesel from '../models/fuelDiesel';
+import {AuthenticationError} from 'apollo-server-express';
+import {authErrorMessage} from '../utils/messages';
 
 export default {
   Query: {
@@ -14,7 +16,11 @@ export default {
     },
   },
   Mutation: {
-    updateDiesel: async (parent, {stationID, price}) => {
+    updateDiesel: async (parent, {stationID, price}, {user}) => {
+      if (!user) {
+        throw new AuthenticationError(authErrorMessage);
+      }
+
       const newDiesel = await FuelDiesel.findOneAndUpdate(
           {stationID},
           {price},
