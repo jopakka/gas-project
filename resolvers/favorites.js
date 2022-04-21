@@ -2,6 +2,7 @@
 
 import {AuthenticationError} from 'apollo-server-express';
 import Favorites from '../models/favorites';
+import {authErrorMessage} from '../utils/messages';
 
 export default {
   Query: {
