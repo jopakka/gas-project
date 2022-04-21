@@ -1,5 +1,6 @@
 'use strict';
 import mongoose from 'mongoose';
+import {stationID} from '../utils/types';
 
 const Schema = mongoose.Schema;
 
@@ -8,19 +9,7 @@ const favoriteSchema = new Schema({
     type: String,
     required: true,
   },
-  stationID: {
-    type: String,
-    required: true,
-    validate: {
-      validator: (v) => {
-        const types = ['node', 'way']
-        const [type, id] = v.split('/')
-        if(!types.includes(type)) return false
-        return /^\d*$/.test(id)
-      },
-      message: props => `${props.value} is not a station ID!`
-    }
-  },
+  stationID: stationID,
 }, {timestamps: true});
 
 export default mongoose.model('Favorite', favoriteSchema);

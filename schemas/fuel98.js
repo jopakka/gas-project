@@ -7,6 +7,6 @@ export default gql`
    }
    
    extend type Mutation {
-     update98(stationID: String!, price: Float!): Fuel
+     update98(stationID: String!, price: String!): Fuel
    }
 `;

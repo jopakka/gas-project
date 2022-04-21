@@ -1,19 +1,12 @@
 'use strict';
 import mongoose from 'mongoose';
+import {price, stationID} from '../utils/types';
 
 const Schema = mongoose.Schema;
 
 const fuelSchema = new Schema({
-  stationID: {
-    type: String,
-    required: true,
-  },
-  price: {
-    type: Number,
-    required: true,
-    min: 0,
-    max: 10,
-  },
+  stationID: stationID,
+  price: price,
 }, {timestamps: true});
 
 export default fuelSchema;

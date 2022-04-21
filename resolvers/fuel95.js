@@ -2,6 +2,7 @@
 import Fuel95 from '../models/fuel95';
 import {AuthenticationError} from 'apollo-server-express';
 import {authErrorMessage} from '../utils/messages';
+import {addDecimals} from '../utils/validators';
 
 export default {
   Query: {
@@ -20,6 +21,8 @@ export default {
       if (!user) {
         throw new AuthenticationError(authErrorMessage);
       }
+
+      price = addDecimals(price)
 
       const new95 = await Fuel95.findOneAndUpdate(
           {stationID},
