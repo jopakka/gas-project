@@ -5,9 +5,9 @@ import {
   getStationsAround,
   getStationsByBounds,
 } from '../utils/overpass';
-import Fuel95 from '../models/fuel95';
-import Fuel98 from '../models/fuel98';
-import FuelDiesel from '../models/fuelDiesel';
+import Fuel95 from '../models/fuel95Model';
+import Fuel98 from '../models/fuel98Model';
+import FuelDiesel from '../models/fuelDieselModel';
 
 const getFuelPrices = async (station) => {
   station.prices = {

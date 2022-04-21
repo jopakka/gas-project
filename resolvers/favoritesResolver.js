@@ -1,7 +1,7 @@
 'use strict';
 
 import {AuthenticationError} from 'apollo-server-express';
-import Favorites from '../models/favorites';
+import Favorites from '../models/favoritesModel';
 import {authErrorMessage} from '../utils/messages';
 
 export default {

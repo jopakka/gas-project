@@ -1,12 +1,12 @@
 'use strict';
 import {gql} from 'apollo-server-express';
-import stations from './stations';
-import fuel95 from './fuel95';
-import fuel98 from './fuel98';
-import fuelDiesel from './fuelDiesel';
-import fuel from './fuel';
-import user from './user';
-import favorites from './favorites';
+import stations from './stationsSchema';
+import fuel95 from './fuel95Schema';
+import fuel98 from './fuel98Schema';
+import fuelDiesel from './fuelDieselSchema';
+import fuel from './fuelSchema';
+import user from './userSchema';
+import favorites from './favoritesSchema';
 
 const linkSchema = gql`
    type Query {

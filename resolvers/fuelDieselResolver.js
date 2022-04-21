@@ -1,5 +1,5 @@
 'use strict';
-import FuelDiesel from '../models/fuelDiesel';
+import FuelDiesel from '../models/fuelDieselModel';
 import {AuthenticationError} from 'apollo-server-express';
 import {authErrorMessage} from '../utils/messages';
 import {addDecimals} from '../utils/validators';

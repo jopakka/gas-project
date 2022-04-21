@@ -1,10 +1,10 @@
 'use strict';
-import stations from './stations';
-import fuel95 from './fuel95';
-import fuel98 from './fuel98';
-import fuelDiesel from './fuelDiesel';
-import user from './user';
-import favorites from './favorites';
+import stations from './stationsResolver';
+import fuel95 from './fuel95Resolver';
+import fuel98 from './fuel98Resolver';
+import fuelDiesel from './fuelDieselResolver';
+import user from './userResolver';
+import favorites from './favoritesResolver';
 
 export default [
   stations,

@@ -3,7 +3,7 @@ import passport from 'passport';
 import Strategy from 'passport-local';
 import {ExtractJwt, Strategy as JWTStrategy} from 'passport-jwt';
 import bcrypt from 'bcrypt';
-import User from '../models/user';
+import User from '../models/userModel';
 import dotenv from 'dotenv';
 import {loginErrorMessage} from './messages';
 
