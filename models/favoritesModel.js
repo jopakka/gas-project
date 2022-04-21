@@ -1,14 +1,11 @@
 'use strict';
 import mongoose from 'mongoose';
-import {stationID} from '../utils/types';
+import {stationID, userID} from '../utils/types';
 
 const Schema = mongoose.Schema;
 
 const favoriteSchema = new Schema({
-  userID: {
-    type: String,
-    required: true,
-  },
+  userID: userID,
   stationID: stationID,
 }, {timestamps: true});
 

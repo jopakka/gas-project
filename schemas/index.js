@@ -7,6 +7,7 @@ import fuelDiesel from './fuelDieselSchema';
 import fuel from './fuelSchema';
 import user from './userSchema';
 import favorites from './favoritesSchema';
+import history from './historySchema';
 
 const linkSchema = gql`
    type Query {
@@ -26,4 +27,5 @@ export default [
   fuelDiesel,
   user,
   favorites,
+  history,
 ];

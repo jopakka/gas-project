@@ -3,6 +3,7 @@ import Fuel98 from '../models/fuel98Model';
 import {AuthenticationError} from 'apollo-server-express';
 import {authErrorMessage} from '../utils/messages';
 import {addDecimals} from '../utils/validators';
+import saveHistory from '../utils/saveHistory';
 
 export default {
   Query: {
@@ -22,13 +23,17 @@ export default {
         throw new AuthenticationError(authErrorMessage);
       }
 
-      price = addDecimals(price)
+      price = addDecimals(price);
 
       const new98 = await Fuel98.findOneAndUpdate(
           {stationID},
           {price},
           {new: true, upsert: true});
-      return new98.save();
+      const saved = await new98.save();
+
+      await saveHistory(stationID, user, price, saved, '98');
+
+      return saved;
     },
   },
 };

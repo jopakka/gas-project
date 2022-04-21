@@ -18,7 +18,13 @@ const price = {
   },
 };
 
+const userID = {
+  type: String,
+  required: true,
+};
+
 export {
   stationID,
   price,
+  userID,
 };
