@@ -5,10 +5,9 @@ import {ExtractJwt, Strategy as JWTStrategy} from 'passport-jwt';
 import bcrypt from 'bcrypt';
 import User from '../models/user';
 import dotenv from 'dotenv';
+import {loginErrorMessage} from './messages';
 
 dotenv.config();
-
-const invalidLoginMessage = 'Invalid credentials';
 
 passport.use('local', new Strategy({},
     async (username, password, done) => {
@@ -17,15 +16,15 @@ passport.use('local', new Strategy({},
       if (!user) {
         setTimeout(() => {
         }, Math.floor(Math.random() * 1000));
-        return done(null, false, invalidLoginMessage);
+        return done(null, false, loginErrorMessage);
       }
       try {
         // if passwords dont match
         if (!await bcrypt.compare(password, user.password)) {
-          return done(null, false, invalidLoginMessage);
+          return done(null, false, loginErrorMessage);
         }
       } catch (e) {
-        return done(null, false, invalidLoginMessage);
+        return done(null, false, loginErrorMessage);
       }
       // if all is ok
       const strippedUser = user.toObject();
