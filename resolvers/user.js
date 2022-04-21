@@ -8,6 +8,7 @@ import {
   UserInputError,
 } from 'apollo-server-express';
 import jwt from 'jsonwebtoken';
+import {passwordValidator} from '../utils/validators';
 
 export default {
   Query: {
@@ -34,7 +35,7 @@ export default {
         }
 
         // Check is passwords strong
-        if(!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(pw)) {
+        if(!passwordValidator(pw)) {
           return new UserInputError(
               "Password must be minimum eight characters, " +
               "at least one uppercase letter, " +

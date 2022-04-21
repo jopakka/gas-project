@@ -9,6 +9,10 @@ const priceValidator = (v) => {
   return /^((\d{1,3}[.])\d{1,3})$/.test(v);
 };
 
+const passwordValidator = (v) => {
+  return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(v);
+};
+
 const addDecimals = (price) => {
   if (priceValidator(price)) {
     const dec = price.split('.')[1];
@@ -21,4 +25,5 @@ export {
   stationIdValidator,
   priceValidator,
   addDecimals,
+  passwordValidator,
 };
