@@ -1,6 +1,5 @@
 'use strict';
 import mongoose from 'mongoose';
-import {passwordValidator} from '../utils/validators';
 
 const Schema = mongoose.Schema;
 

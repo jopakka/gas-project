@@ -6,6 +6,8 @@ import express from 'express';
 import db from './utils/db';
 import helmet from 'helmet';
 import {checkAuth} from './utils/auth';
+import {Server} from 'socket.io';
+import http from 'http';
 
 const httpPort = process.env.HTTP_PORT || 3000;
 
@@ -29,7 +31,6 @@ const httpPort = process.env.HTTP_PORT || 3000;
     }
 
     await server.start();
-
     server.applyMiddleware({app});
 
     process.env.NODE_ENV = process.env.NODE_ENV || 'development';
