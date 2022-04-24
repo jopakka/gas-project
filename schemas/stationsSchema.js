@@ -13,6 +13,7 @@ export default gql`
       properties: Properties
       geometry: Geometry
       prices: Prices
+      address: Address
    }
    
    type Properties {
@@ -30,6 +31,14 @@ export default gql`
       fuel95: Fuel
       fuel98: Fuel
       fuelDiesel: Fuel
+   }
+   
+   type Address {
+      house_number: String
+      road: String
+      city: String
+      postcode: String
+      country: String
    }
    
    input Bounds {
