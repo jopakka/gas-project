@@ -6,6 +6,12 @@ import {authErrorMessage} from '../utils/messages';
 
 export default {
   Query: {
+    favorite: async (parent, {stationID}, {user}) => {
+      if (!user) {
+        throw new AuthenticationError(authErrorMessage);
+      }
+      return Favorites.findOne({stationID, userID: user._id});
+    },
     favorites: async (parent, args, {user}) => {
       if (!user) {
         throw new AuthenticationError(authErrorMessage);
