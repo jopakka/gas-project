@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import https from 'https';
 import http from 'http';
 import fs from 'fs';
-import socket from './socket';
+import {initIO} from './socket';
 
 dotenv.config();
 const httpsPort = process.env.HTTPS_PORT || 8000;
@@ -17,8 +17,8 @@ const options = {
 };
 
 export default (app, httpPort) => {
-  const httpsServer = https.createServer(options, app)
-  socket(httpsServer, httpsPort)
+  const httpsServer = https.createServer(options, app);
+  initIO(httpsServer, httpsPort);
 
   // httpsServer.listen(httpsPort, () => console.log(
   //     `Localhost secure app listening port ${httpsPort}`));

@@ -6,6 +6,5 @@ export default gql`
       stationID: String
       price: String
       updatedAt: String
-      userID: ID
    }
 `;

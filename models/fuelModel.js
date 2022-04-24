@@ -7,7 +7,6 @@ const Schema = mongoose.Schema;
 const fuelSchema = new Schema({
   stationID: stationID,
   price: price,
-  userID: userID,
 }, {timestamps: true});
 
 export default fuelSchema;

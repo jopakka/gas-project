@@ -4,6 +4,7 @@ import {AuthenticationError} from 'apollo-server-express';
 import {authErrorMessage} from '../utils/messages';
 import {addDecimals} from '../utils/validators';
 import saveHistory from '../utils/saveHistory';
+import {socket} from '../utils/socket';
 
 export default {
   Query: {
@@ -31,6 +32,8 @@ export default {
       const saved = await newDiesel.save();
 
       await saveHistory(stationID, user, price, saved, 'diesel');
+
+      socket.emit(`price ${stationID} diesel`, {price, updatedAt: saved.updatedAt})
       return saved;
     },
   },
