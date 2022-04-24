@@ -8,13 +8,12 @@ import saveHistory from '../utils/saveHistory';
 export default {
   Query: {
     fuel98: async (parent, {stationID}) => {
-      return Fuel98.findOne({stationID});
+      return Fuel98.findOne({stationID}, {}, {sort: {'createdAt': -1}});
     },
   },
   Prices: {
     fuel98: async (parent) => {
-      const stationID = Object.keys(parent)[0];
-      return Fuel98.findOne({stationID});
+      return Fuel98.findOne({stationID: parent}, {}, {sort: {'createdAt': -1}});
     },
   },
   Mutation: {
@@ -30,9 +29,7 @@ export default {
           {price},
           {new: true, upsert: true});
       const saved = await new98.save();
-
       await saveHistory(stationID, user, price, saved, '98');
-
       return saved;
     },
   },

@@ -8,13 +8,12 @@ import saveHistory from '../utils/saveHistory';
 export default {
   Query: {
     fuelDiesel: async (parent, {stationID}) => {
-      return FuelDiesel.findOne({stationID});
+      return FuelDiesel.findOne({stationID}, {}, { sort: { 'createdAt' : -1 } });
     },
   },
   Prices: {
     fuelDiesel: async (parent) => {
-      const stationID = Object.keys(parent)[0];
-      return FuelDiesel.findOne({stationID});
+      return FuelDiesel.findOne({stationID: parent}, {}, { sort: { 'createdAt' : -1 } });
     },
   },
   Mutation: {
