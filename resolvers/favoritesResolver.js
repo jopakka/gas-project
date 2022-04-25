@@ -3,6 +3,7 @@
 import {AuthenticationError} from 'apollo-server-express';
 import Favorites from '../models/favoritesModel';
 import {authErrorMessage} from '../utils/messages';
+import {getStation} from '../utils/overpass';
 
 export default {
   Query: {
@@ -16,7 +17,17 @@ export default {
       if (!user) {
         throw new AuthenticationError(authErrorMessage);
       }
-      return Favorites.find({userID: user._id});
+
+      const favs = await Favorites.find({userID: user._id});
+      await Promise.all(favs.map(async f => {
+        const info = (await getStation(f.stationID))[0];
+        if (info) f.properties = info.properties;
+        f.prices = f.stationID;
+      }));
+
+      console.log('favs', favs);
+
+      return favs;
     },
   },
   Mutation: {

@@ -20,7 +20,11 @@ export default {
     },
     login: async (parent, args, {req}) => {
       req.body = args;
-      return await login(req);
+      try {
+        return await login(req);
+      } catch (e) {
+        throw new UserInputError('Username or password invalid')
+      }
     },
   },
   Mutation: {

@@ -9,7 +9,8 @@ export default gql`
    }
    
    type Station {
-      id: String
+      id: ID
+      stationID: String
       properties: Properties
       geometry: Geometry
       prices: Prices
