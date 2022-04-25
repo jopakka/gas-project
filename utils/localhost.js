@@ -17,6 +17,7 @@ const options = {
 };
 
 export default (app, httpPort) => {
+  console.log('Starting development');
   const httpsServer = https.createServer(options, app);
   initIO(httpsServer, httpsPort);
 

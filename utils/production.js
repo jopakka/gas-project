@@ -4,6 +4,7 @@ import http from 'http';
 import {initIO} from './socket';
 
 export default (app, httpPort) => {
+  console.log('Starting production');
   app.enable('trust proxy');
   app.use((req, res, next) => {
     if (req.secure) {
