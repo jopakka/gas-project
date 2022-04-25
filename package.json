@@ -2,7 +2,7 @@
   "name": "sssf-gas-project",
   "version": "1.0.0",
   "description": "SSSF course project",
-  "main": "server.js",
+  "main": "start.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
