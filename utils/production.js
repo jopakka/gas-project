@@ -16,9 +16,9 @@ export default (app, httpPort) => {
     }
   });
 
-  // const httpServer = http.createServer(app);
-  // initIO(httpServer, httpPort);
+  const httpServer = http.createServer(app);
+  initIO(httpServer, httpPort);
 
-  app.listen(httpPort,
-      () => console.log(`Production app listening port ${httpPort}`));
+  // app.listen(httpPort,
+  //     () => console.log(`Production app listening port ${httpPort}`));
 }
