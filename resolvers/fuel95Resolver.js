@@ -9,12 +9,12 @@ import {socket} from '../utils/socket';
 export default {
   Query: {
     fuel95: async (parent, {stationID}) => {
-      return Fuel95.findOne({stationID}, {}, {sort: {'createdAt': -1}});
+      return Fuel95.findOne({stationID});
     },
   },
   Prices: {
     fuel95: async (parent) => {
-      return Fuel95.findOne({stationID: parent}, {}, {sort: {'createdAt': -1}});
+      return Fuel95.findOne({stationID: parent});
     },
   },
   Mutation: {
