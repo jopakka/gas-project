@@ -11,7 +11,7 @@ export default {
       return History.find({userID});
     },
     stationHistory: async (parent, {stationID, type}) => {
-      const filter = type ? {stationID, type} : {stationID}
+      const filter = type ? {stationID, type: type.toLowerCase()} : {stationID}
       return History.find(filter);
     },
   },
