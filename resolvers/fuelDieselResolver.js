@@ -33,7 +33,12 @@ export default {
 
       await saveHistory(stationID, user, price, saved, 'diesel');
 
-      socket.emit(`price ${stationID} diesel`, {price, updatedAt: saved.updatedAt})
+      try {
+        socket.emit(`price ${stationID} diesel`,
+            {price, updatedAt: saved.updatedAt});
+      } catch (e) {
+        console.error('socket', e);
+      }
       return saved;
     },
   },
