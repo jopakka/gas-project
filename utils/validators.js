@@ -1,3 +1,5 @@
+import {UserInputError} from 'apollo-server-express';
+
 const stationIdValidator = (v) => {
   const types = ['node', 'way'];
   const [type, id] = v.split('/');
@@ -19,6 +21,7 @@ const addDecimals = (price) => {
     const len = dec.length > 3 ? dec.length : 3;
     return Number(price).toFixed(len).toString();
   }
+  throw new UserInputError("Invalid price")
 };
 
 export {

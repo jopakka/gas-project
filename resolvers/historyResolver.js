@@ -8,7 +8,7 @@ export default {
       if (!user) {
         throw new AuthenticationError('Invalid credentials');
       }
-      return History.find({userID});
+      return History.find({userID: userID || user._id});
     },
     stationHistory: async (parent, {stationID, type}) => {
       const filter = type ? {stationID, type: type.toLowerCase()} : {stationID}

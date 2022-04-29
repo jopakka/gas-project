@@ -25,8 +25,6 @@ export default {
         f.prices = f.stationID;
       }));
 
-      console.log('favs', favs);
-
       return favs;
     },
   },

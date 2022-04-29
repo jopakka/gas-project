@@ -12,11 +12,11 @@ import {passwordValidator} from '../utils/validators';
 
 export default {
   Query: {
-    user: async (parent, args, {user}) => {
+    user: async (parent, {id}, {user}) => {
       if (!user) {
         throw new AuthenticationError('Invalid credentials');
       }
-      return User.findById(args.id);
+      return User.findById(id || user._id);
     },
     login: async (parent, args, {req}) => {
       req.body = args;
