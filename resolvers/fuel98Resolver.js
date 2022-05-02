@@ -4,7 +4,7 @@ import {AuthenticationError} from 'apollo-server-express';
 import {authErrorMessage} from '../utils/messages';
 import {addDecimals} from '../utils/validators';
 import saveHistory from '../utils/saveHistory';
-import {socket} from '../utils/socket';
+import {io} from '../utils/socket';
 
 export default {
   Query: {
@@ -33,7 +33,7 @@ export default {
       await saveHistory(stationID, user, price, saved, '98');
 
       try {
-        socket.emit(`price ${stationID} 98`,
+        io.emit(`price ${stationID} 98`,
             {price, updatedAt: saved.updatedAt});
       } catch (e) {
         console.error('socket', e);

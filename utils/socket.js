@@ -1,9 +1,10 @@
 import {Server} from 'socket.io';
 
 let socket;
+let io;
 
 const initIO = (server, port) => {
-  const io = new Server(server, {
+  io = new Server(server, {
     cors: {
       methods: ['GET', 'POST', 'OPTIONS'],
       allowedHeaders: ['react-header'],
@@ -26,4 +27,5 @@ const initIO = (server, port) => {
 export {
   initIO,
   socket,
+  io,
 };
