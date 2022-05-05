@@ -8,7 +8,7 @@ const saveHistory = async (stationID, user, price, saved, type) => {
     updatedAt: saved.updatedAt,
     type,
   });
-  await history.save();
+  return await history.save();
 };
 
 export default saveHistory;

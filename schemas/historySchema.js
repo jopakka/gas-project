@@ -8,6 +8,7 @@ export default gql`
   }
   
   type History {
+    id: ID
     userID: ID
     stationID: String
     price: String

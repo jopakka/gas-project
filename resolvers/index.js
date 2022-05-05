@@ -6,6 +6,7 @@ import fuelDiesel from './fuelDieselResolver';
 import user from './userResolver';
 import favorites from './favoritesResolver';
 import history from './historyResolver';
+import rating from './ratingResolver';
 
 export default [
   stations,
@@ -15,4 +16,5 @@ export default [
   user,
   favorites,
   history,
+  rating,
 ];

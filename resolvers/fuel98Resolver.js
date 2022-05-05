@@ -5,6 +5,7 @@ import {authErrorMessage} from '../utils/messages';
 import {addDecimals} from '../utils/validators';
 import saveHistory from '../utils/saveHistory';
 import {io} from '../utils/socket';
+import History from '../models/historyModel';
 
 export default {
   Query: {
@@ -14,7 +15,12 @@ export default {
   },
   Prices: {
     fuel98: async (parent) => {
-      return Fuel98.findOne({stationID: parent});
+      const result = await Fuel98.findOne({stationID: parent});
+      if (result) {
+        const history = await History.findOne({stationID: parent, type: '95'});
+        result.historyID = history._id;
+      }
+      return result;
     },
   },
   Mutation: {
@@ -30,11 +36,11 @@ export default {
           {price},
           {new: true, upsert: true});
       const saved = await new98.save();
-      await saveHistory(stationID, user, price, saved, '98');
+      const history = await saveHistory(stationID, user, price, saved, '98');
 
       try {
         io.emit(`price ${stationID} 98`,
-            {price, updatedAt: saved.updatedAt});
+            {price, updatedAt: saved.updatedAt, historyID: history._id});
       } catch (e) {
         console.error('socket', e);
       }
