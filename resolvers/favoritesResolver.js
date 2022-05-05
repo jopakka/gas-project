@@ -9,7 +9,7 @@ export default {
   Query: {
     favorite: async (parent, {stationID}, {user}) => {
       if (!user) {
-        throw new AuthenticationError(authErrorMessage);
+        return null
       }
       return Favorites.findOne({stationID, userID: user._id});
     },
