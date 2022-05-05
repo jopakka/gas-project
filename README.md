@@ -77,6 +77,16 @@ Header
 Authorization: Bearer <YOUR_TOKEN_HERE>
 ```
 
+#### Add rating
+```graphql
+addRating(historyID: ID!, rating: Int!): Rating
+```
+
+Header
+```
+Authorization: Bearer <YOUR_TOKEN_HERE>
+```
+
 ### Queries
 #### Login
 ```graphql
@@ -176,6 +186,10 @@ Header
 Authorization: Bearer <YOUR_TOKEN_HERE>
 ```
 
+#### Rating
+```graphql
+rating(historyID: ID): Int
+```
 
 ### Object types
 #### Types
@@ -258,6 +272,8 @@ type History {
 
 ```graphql
 type Fuel {
+    historyID: ID
+    rating: Int
     stationID: String
     price: String
     updatedAt: String
@@ -269,6 +285,14 @@ type Favorite {
     userID: ID
     stationID: String
 }
+```
+
+```graphql
+type Rating {
+    userID: ID
+    historyID: ID
+    rating: Int
+  }
 ```
 
 #### Inputs
